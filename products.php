@@ -1,3 +1,42 @@
+<?php
+
+    require_once('dpconfig.in.php');
+    include_once('Product.php');
+
+    $pdo = db_connect();
+
+    //to check for the form if it was submitted or not
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $product_name = isset($_POST['product_name']) ? $_POST['product_name'] : '';
+        $filter_by = isset($_POST['filter_by']) ? $_POST['filter_by'] : '';
+        $category = isset($_POST['category']) ? $_POST['category'] : '';
+
+        // setting a base sql statement so if no filters applied get all the products in the system
+        $sql = "SELECT * FROM clothes WHERE 1=1";
+
+        if (!empty($product_name) && !empty($filter_by)) {
+            if ($filter_by === 'name') {
+                $sql .= " AND product_name LIKE '%$product_name%'";
+            } elseif ($filter_by === 'price') {
+                //here cause the use might chose to type 80 in the input box and chose the price filter
+                $sql .= " AND price >= '$product_name'";
+            }
+        }
+        if(!empty($category)){
+            $sql .= " AND category = '$category'";
+        }
+        echo 'we are in the if statement '.$sql;
+        $result = $pdo->query($sql);
+    } else {
+        //get all clothes if the form was not submitted 
+        echo 'we are in the else statement';
+        $sql = "SELECT * FROM clothes";
+        $result = $pdo->query($sql);
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,18 +54,18 @@
             <p>or use the actions below to edit or delete a Product's record.</p>
             <fieldset>
                 <legend>Advanced Product Search</legend>
-                <form>
-                    <input type="text" id="productName" name="productName" placeholder="Search Product Name">
+                <form method="POST" action="products.php">
+                    <input type="text" id="product_name" name="product_name" placeholder="Search Product Name">
 
-                    <label><input type="radio" name="searchBy" value="name"> Name</label>
-                    <label><input type="radio" name="searchBy" value="price"> Price</label>
-                    <label><input type="radio" name="searchBy" value="category"> Category</label>
+                    <label><input type="radio" name="filter_by" value="name"> Name</label>
+                    <label><input type="radio" name="filter_by" value="price"> Price</label>
+                    <label><input type="radio" name="filter_by" value="category"> Category</label>
 
                     <select name="category">
                         <option value="" disabled selected>Select Category</option>
-                        <option value="category1">Shirts</option>
-                        <option value="category2">Boots</option>
-                        <option value="category3">Leggings</option>
+                        <option value="Shirts">Shirts</option>
+                        <option value="Boots">Boots</option>
+                        <option value="Leggings">Leggings</option>
                     </select>
 
                     <button type="submit">Filter</button>
@@ -46,30 +85,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img src="images/cotton-shirt.jpg" alt="Shippify Cotton Shirt" width="200"></td>
-                            <td><a href="">112</a></td>
-                            <td>Shippify Cotton Shirt</td>
-                            <td>Shirts</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>
-                                <button><img src="images/edit.png" alt="edit pen"></button>
-                                <button><img src="images/delete.png" alt="delete trash"></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/wings-shirt.jpg" alt="Wings Shirt" width="200"></td>
-                            <td><a href="">113</a></td>
-                            <td>Wings Shirt</td>
-                            <td>Shirts</td>
-                            <td>80</td>
-                            <td>15</td>
-                            <td>
-                                <button><img src="images/edit.png" alt="edit pen"></button>
-                                <button><img src="images/delete.png" alt="delete trash"></button>
-                            </td>
-                        </tr>
+                        <?php
+                        if ($result) {
+                            while($product = $result->fetchObject('Product')){
+                                echo $product->outputAsRow();
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </fieldset>
