@@ -1,17 +1,18 @@
-<?php
-    define('DB_HOST', 'your_host');
-    define('DB_NAME', 'your_database');
-    define('DB_USER', 'your_username');
-    define('DB_PASS', 'your_password');
+<?php 
 
-    function connectToDatabase($host = DB_HOST, $dbname = DB_NAME, $username = DB_USER, $password = DB_PASS) {
-        try {
-            $pdo = new PDO("mysql:host=".$host.";dbname=".$dbname, $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+    define("DBHOST", "localhost");
+    define("DBNAME","shippify-clothes");
+    define("DBUSER","MotasemAli");
+    define("DBPASS","Simon1110");
+
+    function db_connect($dbhost = DBHOST,$dbname = DBNAME, $dbuser = DBUSER, $dbpass = DBPASS){
+        $connectionString = "mysql:host=$dbhost;dbname=$dbname";
+
+        try{
+            $pdo = new PDO($connectionString, $dbuser, $dbpass);
+        return $pdo;
+        }catch(PDOException $e){
+            die($e->getMessage());
         }
     }
-    $pdo = connectToDatabase();
 ?>
