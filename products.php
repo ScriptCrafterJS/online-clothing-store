@@ -20,16 +20,16 @@
             } elseif ($filter_by === 'price') {
                 //here cause the use might chose to type 80 in the input box and chose the price filter
                 $sql .= " AND price >= '$product_name'";
+            } elseif ($filter_by === 'category') {
+                $sql .= " AND category = '$category'";
             }
         }
         if(!empty($category)){
             $sql .= " AND category = '$category'";
         }
-        echo 'we are in the if statement '.$sql;
         $result = $pdo->query($sql);
     } else {
         //get all clothes if the form was not submitted 
-        echo 'we are in the else statement';
         $sql = "SELECT * FROM clothes";
         $result = $pdo->query($sql);
     }
