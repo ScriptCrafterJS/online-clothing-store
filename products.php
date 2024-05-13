@@ -67,7 +67,6 @@
                         <option value="Boots">Boots</option>
                         <option value="Leggings">Leggings</option>
                     </select>
-
                     <button type="submit">Filter</button>
                 </form>
                 <br>
@@ -88,7 +87,7 @@
                         <?php
                         if ($result) {
                             while($product = $result->fetchObject('Product')){
-                                echo $product->outputAsRow();
+                                echo $product->displayInTable();
                             }
                         }
                         ?>
