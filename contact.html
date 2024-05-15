@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Team</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img src="images/logo.png" alt="logo" height="40" width="40" />
+        <span>Shippify</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products/product1.html">Product 1</a></li>
+          <li><a href="products/product2.html">Product 2</a></li>
+          <li><a href="register.html">Registration</a></li>
+        </ul>
+      </nav>
+      <h1>Welcome to Shippify</h1>
+      <p>
+        one of the best stores you could ever visit in your entire life<br />no
+        need to go to a thousends of stores
+      </p>
+    </header>
+    <hr />
+    <section>
+      <h2>Contact Shippify Team</h2>
+      <p>Address: Tulkarm/Kuffer Jammal/Secondary school street</p>
+      <p>Telephone Number: +972 546 697 525</p>
+      <p>Email: shippify@gmail.com</p>
+      <h3>Send us a message</h3>
+      <form
+        action="http://comp334.studentswebprojects.ritaj.ps/util/process.php"
+        method="post"
+      >
+        <fieldset>
+          <legend>Personal Information</legend>
+          <label for="sender-name">Sender Name:</label><br />
+          <input
+            required
+            type="text"
+            name="sender-name"
+            id="sender-name"
+          /><br />
+          <label for="sender-email">Sender Email:</label><br />
+          <input
+            required
+            type="email"
+            name="sender-email"
+            id="sender-email"
+          /><br />
+        </fieldset>
+        <fieldset>
+          <legend>Message Options:</legend>
+          <label for="message-subject">Message Subject:</label><br />
+          <input
+            required
+            type="text"
+            name="message-subject"
+            id="message-subject"
+          /><br />
+          <label for="message-body">Message Body:</label><br />
+          <textarea
+            required
+            id="message-body"
+            name="message-body"
+            rows="5"
+            cols="40"
+          ></textarea
+          ><br />
+        </fieldset>
+        <fieldset>
+          <legend>Address</legend>
+          <label for="living-city">Living City:</label>
+          <input type="text" name="living-city" id="living-city" />
+        </fieldset>
+        <button type="submit">Submit</button>
+        <button type="reset">Clear</button>
+      </form>
+    </section>
+    <hr />
+    <footer>
+      <h2>Contact Details</h2>
+      <p>Last update date: 4/6/2024</p>
+      <p>Address: Tulkarm/Kuffer Jammal/Secondary school street</p>
+      <h3>Customer Support:</h3>
+      <ul>
+        <li>Telephone Number: +972 546 697 525</li>
+        <li>Email: shippify@gmail.com</li>
+        <li><a href="contact.html">Contact us</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
