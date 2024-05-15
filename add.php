@@ -76,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <?php echo displayHead()?>
     <form action="add.php" method="POST" enctype="multipart/form-data">
         <fieldset>
             <legend>Product Record:</legend>
@@ -103,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Insert</button>
         </fieldset>
     </form>
+    <?php echo displayFooter(); ?>
 </body>
 
 </html>

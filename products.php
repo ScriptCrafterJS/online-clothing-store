@@ -48,7 +48,8 @@
 
 <body>
     <main>
-        <header>
+        <?php echo displayHead(); ?>
+        <article>
             <p>to add a new product click on the following link <a href="add.php" aria-label="Add Product">Add
                     Product</a>.</p>
             <br>
@@ -95,7 +96,8 @@
                     </tbody>
                 </table>
             </fieldset>
-        </header>
+        </article>
+        <?php echo displayFooter(); ?>
     </main>
 </body>
 

@@ -29,11 +29,13 @@ if (isset($_GET['product_id'])) {
 </head>
 
 <body>
+    <?php displayHead()?>
     <main>
         <?php
             if ($product) {
                 echo $product->displayProductPage();
             }
+            echo displayFooter();
         ?>
     </main>
 </body>
