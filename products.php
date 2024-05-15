@@ -49,7 +49,8 @@
 <body>
     <main>
         <header>
-            <p>to add a new product click on the following link <a href="" aria-label="Add Product">Add Product</a>.</p>
+            <p>to add a new product click on the following link <a href="add.php" aria-label="Add Product">Add
+                    Product</a>.</p>
             <br>
             <p>or use the actions below to edit or delete a Product's record.</p>
             <fieldset>
