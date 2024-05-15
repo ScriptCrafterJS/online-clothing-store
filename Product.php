@@ -94,8 +94,8 @@ class Product{
          <td>$this->price</td>
          <td>$this->quantity</td>
          <td>
-         <button><img src='images/edit.png' alt='edit pen'></button>
-         <button><img src='images/delete.png' alt='delete trash'></button>
+         <button><a href='edit.php?product=$this->product_id'><img src='images/edit.png' alt='edit pen'></button>
+         <button><a href='delete.php?product_id=$this->product_id'><img src='images/delete.png' alt='delete trash'></button>
          </td>
          </tr>
     REC;
