@@ -87,15 +87,15 @@ class Product{
         }
         $row = <<<REC
          <tr>
-         <td><img src='images/$imagePath' alt='$this->product_name' width='200'></td>
+         <td><figure><img src='images/$imagePath' alt='$this->product_name' width='200'></figure></td>
          <td><a href='view.php?product_id=$this->product_id'>$this->product_id</a></td>
          <td>$this->product_name</td>
          <td>$this->category</td>
          <td>$this->price</td>
          <td>$this->quantity</td>
          <td>
-         <button><a href='edit.php?product_id=$this->product_id'><img src='images/edit.png' alt='edit pen'></button>
-         <button><a href='delete.php?product_id=$this->product_id'><img src='images/delete.png' alt='delete trash'></button>
+         <button type="button"><a href='edit.php?product_id=$this->product_id'><img src='images/edit.png' alt='edit pen'></button>
+         <button type="button"><a href='delete.php?product_id=$this->product_id'><img src='images/delete.png' alt='delete trash'></button>
          </td>
          </tr>
     REC;
@@ -112,7 +112,7 @@ class Product{
             $imagePath = 'leggings/'.$this->image_url;
         }
         $productHTML = <<<REC
-        <img src='images/$imagePath' alt='{$this->product_name}' width='200'>
+        <figure><img src='images/$imagePath' alt='{$this->product_name}' width='200'></figure>
         <h2>Product ID: $this->product_id, $this->product_name</h2>
         <ul>
         <li>Price: $this->price</li>

@@ -20,7 +20,7 @@
        $headerHTML = <<<REC
         <header>
             <nav>
-            <img src="images/logo.png" alt="logo" height="40" width="40" />
+            <figure><img src="images/logo.png" alt="logo" height="40" width="40" /></figure>
             <span>Shippify</span>
             </nav>
             <h1>Welcome to Shippify</h1>
@@ -37,6 +37,7 @@
     function displayFooter(){
         $footerHTML = <<<REC
         <footer>
+        <hr/>
             <h2>Contact Details</h2>
             <p>Last update date: 4/6/2024</p>
             <p>Address: Tulkarm/Kuffer Jammal/Secondary school street</p>
