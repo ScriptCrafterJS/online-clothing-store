@@ -29,7 +29,7 @@ if (isset($_GET['product_id'])) {
 </head>
 
 <body>
-    <?php displayHead()?>
+    <?php echo displayHead()?>
     <main>
         <?php
             if ($product) {
