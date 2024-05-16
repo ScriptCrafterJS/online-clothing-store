@@ -43,9 +43,8 @@
             <h3>Customer Support:</h3>
             <nav>
                 <ul>
-                <li>Telephone Number: +972 546 697 525</li>
-                <li>Email: shippify@gmail.com</li>
-                <li><a href="contact.html">Contact us</a></li>
+                    <li>Telephone Number: +972 546 697 525</li>
+                    <li>Email: shippify@gmail.com</li>
                 </ul>
             </nav>
         </footer>

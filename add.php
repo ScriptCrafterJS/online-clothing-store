@@ -1,68 +1,70 @@
 <?php
 
-require_once('dpconfig.in.php');
-include_once('Product.php');
+    require_once('dpconfig.in.php');
+    include_once('Product.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $productName = $_POST['productName'];
-    $category = $_POST['category'];
-    $price = $_POST['price'];
-    $quantity = $_POST['quantity'];
-    $rating = $_POST['rating'];
-    $description = $_POST['description'];
-    
-    //connect to the database
-    $pdo = db_connect();
-    
-    //fetch the last added element
-    $sql = $pdo->prepare("SELECT * FROM clothes ORDER BY product_id DESC LIMIT 1");
-    $sql->execute();
-    $lastElement = $sql->fetchObject('Product');
-
-    if (!$lastElement) {
-        $lastId = 1; //if no elements found, start from 1
-    } else {
-        $lastId = $lastElement->getProductID() + 1; // Increment last id by 1
-    }
-    
-    //handle file upload
-    if (isset($_FILES['productPhoto'])) {
-        //move the uploaded file to the desired directory
-        $photo = $_FILES['productPhoto'];
-        $targetDir = "images/".$category."/";
-        //basename() extracts the filename from the path of the uploaded file
-        $imageName = basename($photo["name"]);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $productName = $_POST['productName'];
+        $category = $_POST['category'];
+        $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
+        $rating = $_POST['rating'];
+        $description = $_POST['description'];
         
-        //change the file name to be dedicated to its id
-        $extension = pathinfo($imageName, PATHINFO_EXTENSION);//jpeg
-        //rename the image file
-        $newImageName = $lastId . "." . $extension;
+        //connect to the database
+        $pdo = db_connect();
+        
+        //fetch the last added element
+        $sql = $pdo->prepare("SELECT * FROM clothes ORDER BY product_id DESC LIMIT 1");
+        $sql->execute();
+        $lastElement = $sql->fetchObject('Product');
 
-        $targetFile = $targetDir . $newImageName;
-        if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
-            $image_url = $targetFile;
+        if (!$lastElement) {
+            $lastId = 1; //if no elements found, start from 1
         } else {
-            die("There was an error uploading your file.");
+            $lastId = $lastElement->getProductID() + 1; // Increment last id by 1
         }
-    } else {
-        die("File upload failed.");
-    }
-    
-    //insert the product into the database
-    $sql = "INSERT INTO clothes (product_id, product_name, category, price, quantity, rating, description, image_url) 
-            VALUES (:product_id, :productName, :category, :price, :quantity, :rating, :description, :image_url)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':product_id', $lastId);
-    $stmt->bindParam(':productName', $productName);
-    $stmt->bindParam(':category', $category);
-    $stmt->bindParam(':price', $price);
-    $stmt->bindParam(':quantity', $quantity);
-    $stmt->bindParam(':rating', $rating);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':image_url', $newImageName);
-    $stmt->execute();
-}
+        
+        //handle file upload
+        if (isset($_FILES['productPhoto'])) {
+            //move the uploaded file to the desired directory
+            $photo = $_FILES['productPhoto'];
+            $targetDir = "images/".$category."/";
+            //basename() extracts the filename from the path of the uploaded file
+            $imageName = basename($photo["name"]);
+            
+            //change the file name to be dedicated to its id
+            $extension = pathinfo($imageName, PATHINFO_EXTENSION);//jpeg
+            //rename the image file
+            $newImageName = $lastId . "." . $extension;
 
+            $targetFile = $targetDir . $newImageName;
+            if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
+                $image_url = $targetFile;
+            } else {
+                die("There was an error uploading your file.");
+            }
+        } else {
+            die("File upload failed.");
+        }
+        
+        //insert the product into the database
+        $sql = "INSERT INTO clothes (product_id, product_name, category, price, quantity, rating, description, image_url) 
+                VALUES (:product_id, :productName, :category, :price, :quantity, :rating, :description, :image_url)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':product_id', $lastId);
+        $stmt->bindParam(':productName', $productName);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':quantity', $quantity);
+        $stmt->bindParam(':rating', $rating);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':image_url', $newImageName);
+        $stmt->execute();
+
+        header('Location: products.php');
+        exit;
+    }
 ?>
 
 
